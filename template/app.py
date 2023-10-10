@@ -3,7 +3,6 @@ import psycopg2
 
 app = Flask(__name__)
 
-
 # GET return a list of all planets [{'id': 1, 'name': 'plan1'}, {'id': 2, 'name': 'plan2'}, {'id': 3, 'name': 'somevalue'}]
 # POST insert planet and return inserted planet {'id': 1, 'name': 'plan1'}
 # id has to be null
@@ -66,6 +65,8 @@ def connections():
         res = []
         for row in rows:
             res.append(dict(id=row[0], from_planet_id=row[1], to_planet_id=row[2], price=row[3]))
+        if conn is not None:
+                conn.close()
         return Response(str(res), status=200, mimetype='application/json')
     else:
         data = request.json
@@ -97,6 +98,7 @@ def connections():
         finally:
             if conn is not None:
                 conn.close()
+                
 
 # find the cheapest path, return if its reachable, return price and connections used
 @app.route('/booking/<int:from_planet_id>/<int:to_planet_id>') 
