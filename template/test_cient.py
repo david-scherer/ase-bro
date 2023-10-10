@@ -24,9 +24,16 @@ def insConn():
     x = requests.post(url, json = myobj)
     print(x.text)
 
+def errNotFound():
+    url = 'http://localhost:5000/connections'
+    myobj = {'id': None, 'from_planet_id': 1, 'to_planet_id': 111111, 'price': 42}
+    x = requests.post(url, json = myobj)
+    print(x.text)
+
 #insPlanet()
 err1()
 err2()
 
 insConn()
+errNotFound()
 

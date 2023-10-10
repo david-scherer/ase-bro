@@ -98,13 +98,10 @@ def connections():
             if conn is not None:
                 conn.close()
 
-@app.route('/hello2/<string:name>') 
-def hello(name):
-    return 'Hello ' + name + '!' # returns hello Anthony!
-
-# @app.route('/test') #default. only allows GET requests
-# @app.route('/test', methods=['GET', 'POST']) #allows only GET and POST.
-# @app.route('/test', methods=['PUT']) #allows only PUT
+# find the cheapest path, return if its reachable, return price and connections used
+@app.route('/booking/<int:from_planet_id>/<int:to_planet_id>') 
+def algoTask(from_planet_id, to_planet_id):
+    return 'Hello ' + from_planet_id + ' ' + to_planet_id 
 
 if __name__ == '__main__':
     app.run(debug=True)
